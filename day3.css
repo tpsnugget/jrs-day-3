@@ -1,0 +1,9 @@
+.headerContainer {
+   display: flex;
+   justify-content: center;
+}
+
+li {
+   list-style: none;
+   line-height: 1.2em;
+}
