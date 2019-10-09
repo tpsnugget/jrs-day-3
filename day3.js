@@ -107,84 +107,8 @@ displayAnswer(answer, ++i)
 // =============================================================================
 // 9) Write a function that returns the current date and time.
 function question9() {
-   // Number of milliseconds since Jan 1, 1970, UTC
-   var msec = Date.now()
-
    var now = new Date()
-   console.log(now)
-
-   // Correct for Eastern Time, still in msec
-   msec -= 4 * 60 * 60 * 1000
-
-   // Number of years since Jan 1, 1970 in Eastern Time, this is in year.decimal format
-   var year = msec / 1000 / 60 / 60 / 24 / 365
-
-   // Calculate the month, this is in month.decimal year format
-   var month = year - 49
-
-   month *= 12
-   // Month is 0 referenced, this is month.decimal format
-   month += 1
-
-   // Julian day of the year
-   var days = (year - 49) * 365
-   // Remove the leap days
-   days = days - 12
-
-   switch (Math.trunc(month)) {
-      case 1:
-         currentMonth = 'January'
-         day = days
-         break;
-      case 2:
-         currentMonth = 'February'
-         day = days - 31
-         break;
-      case 3:
-         currentMonth = 'March'
-         day = days - 31 - 28
-         break;
-      case 4:
-         currentMonth = 'April'
-         day = days - 31 - 28 - 31
-         break;
-      case 5:
-         currentMonth = 'May'
-         day = days - 31 - 28 - 31 - 30
-         break;
-      case 6:
-         currentMonth = 'June'
-         day = days - 31 - 28 - 31 - 30 - 31
-         break;
-      case 7:
-         currentMonth = 'July'
-         day = days - 31 - 28 - 31 - 30 - 31 - 30
-         break;
-      case 8:
-         currentMonth = 'August'
-         day = days - 31 - 28 - 31 - 30 - 31 - 30 - 31
-         break;
-      case 9:
-         currentMonth = 'September'
-         day = days - 31 - 28 - 31 - 30 - 31 - 30 - 31 - 31
-         break;
-      case 10:
-         currentMonth = 'October'
-         day = days - 31 - 28 - 31 - 30 - 31 - 30 - 31 - 31 - 30
-         break;
-      case 11:
-         currentMonth = 'November'
-         day = days - 31 - 28 - 31 - 30 - 31 - 30 - 31 - 31 - 30 - 31
-         break;
-      case 12:
-         currentMonth = 'December'
-         day = days - 31 - 28 - 31 - 30 - 31 - 30 - 31 - 31 - 30 - 31 - 30
-         break;
-   }
-
-   var currentYear = Math.trunc(year + 1970)
-
-   return day + ' ' + currentMonth + ', ' + currentYear
+   return now
 }
 
 var answer = question9()
@@ -193,7 +117,13 @@ displayAnswer(answer, ++i)
 // =============================================================================
 // 10) Write a function that returns the date 33 days from now.
 function question10() {
-
+   var now = new Date()
+   
+   var today = now.getDate()
+   today += 33
+   now.setDate(today)
+   today = now.getDate()
+   return today
 }
 
 var answer = question10()
@@ -448,8 +378,42 @@ displayAnswer(answer, ++i)
 //     of occurences for every element of an array.
 //     For example, for the array [5,7,12,5,3,3,5], the function countAllOccurences(array)
 //     would return: [[5,3],[7,1],[12,1],[3,2]]
-function question25() {
+function question25(arr) {
+   var index = 0
+   var uniqueNumArr = []
+   var tempArr = arr
+   var mySortedArr = question27(arr)
 
+   // have [3, 3, 5, 5, 5, 7, 12]
+   if (arr.length > 0) {
+      uniqueNumArr.push(arr[0])
+   }
+
+   for (var i = 0; i < arr.length; i++) {
+      if (uniqueNumArr[index] !== arr[i]) {
+         uniqueNumArr.push(arr[i])
+         index += 1
+      }
+   }
+
+   var myMultiDimArr = [[0, 0],
+                        [0, 0],
+                        [0, 0],
+                        [0, 0]]
+
+   // have [3, 5, 7, 12]
+   // have [3, 3, 5, 5, 5, 7, 12]
+   for (var i = 0; i < uniqueNumArr.length; i++) {
+      var count = 0
+      myMultiDimArr[i][0] = uniqueNumArr[i]
+      for (var j = 0; j < arr.length; j++) {
+         if (uniqueNumArr[i] === arr[j]) {
+            count += 1
+            myMultiDimArr[i][1] = count
+         }
+      }
+   }
+   return myMultiDimArr
 }
 
 var answer = question25([5, 7, 12, 5, 3, 3, 5])
