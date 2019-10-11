@@ -333,23 +333,13 @@ displayAnswer(answer, ++i)
 
 // =============================================================================
 // 23) Write a function that takes a string as an argument and returns the reverse of that string.
-
-// FIX ME
-// FIX ME
-// FIX ME
-// FIX ME
-
-
 function question23(str) {
    for (var i = 0; i < str.length; i++) {
       myNewStr.push(str[str.length - 1 - i])
       console.log(myNewStr[i])
    }
-   myNewStr = myNewStr.toString()
-   var index = myNewStr.indexOf(',')
-   console.log(index)
    console.log(myNewStr)
-   myNewStr.slice(index, 1)
+   myNewStr = myNewStr.join('')
    console.log(myNewStr)
    return myNewStr
 }
